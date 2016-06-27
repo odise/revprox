@@ -1,0 +1,16 @@
+proxy "google.example.com" {
+  secret = "secret"
+  authpath = [ "/admin", "/" ]
+  publicpath = [ "/article/{category}" ]
+  target = ["google.com", "google.de"]
+  overwritehost = true
+  hostname = "google.com"
+}
+
+proxy "api2.example.com" {
+  secret = "secret"
+  authpath = [ "/admin", "/hidden" ]
+  target = ["forward3.host.example.com", "forward4.host.example.com"]
+  overwritehost = false
+  hostname = "service.example.com"
+}
