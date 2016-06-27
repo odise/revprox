@@ -27,7 +27,6 @@ proxy "service.example.com" {
   # HOST header will be set to `google.com` instead of `service.example.com`
   hostname = "google.com"
 }
-
 ```
 
 ### Path definition

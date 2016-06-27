@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -40,9 +41,26 @@ func AddSecurityHeaders(request *http.Request, response *http.Response) {
 	response.Header.Set("X-Super-Secure", "Yes!!")
 }
 
+var port string
+var configFile string
+
+func init() {
+	const (
+		defaultport       = ":3009"
+		defaultConfigFile = "./config"
+	)
+	flag.StringVar(&port, "port", defaultport, "Port the server is listening at")
+	flag.StringVar(&port, "p", defaultport, "Port the server is listening at (shorthand)")
+	flag.StringVar(&configFile, "config", defaultConfigFile, "Config file")
+	flag.StringVar(&configFile, "c", defaultConfigFile, "Config file (shorthand)")
+
+}
+
 func main() {
 
-	cfg, err := readConfig("./config")
+	flag.Parse()
+
+	cfg, err := readConfig(configFile)
 	if err != nil {
 		panic(err)
 	}
@@ -55,7 +73,10 @@ func main() {
 
 	app := negroni.New()
 	app.UseHandler(router)
-	app.Run(":3009")
+	if port[0] != ':' {
+		port = ":" + port
+	}
+	app.Run(port)
 }
 
 var myHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
