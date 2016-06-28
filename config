@@ -3,14 +3,16 @@ proxy "google.example.com" {
   authpath = [ "/admin", "/" ]
   publicpath = [ "/article/{category}", "/{test:.*}" ]
   target = ["https://www.google.com", "http://www.google.de"]
-  overwritehost = true
-  hostname = "google.com"
 }
 
 proxy "api2.example.com" {
   secret = "secret"
   authpath = [ "/admin", "/hidden" ]
   target = ["forward3.host.example.com", "forward4.host.example.com"]
-  overwritehost = false
-  hostname = "service.example.com"
+}
+
+proxy "api.example.com" {
+  secret = "secret"
+  publicpath = [ "/" ]
+  target = ["http://localhost:9000","http://localhost:9001"]
 }

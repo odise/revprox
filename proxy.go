@@ -11,7 +11,7 @@ import (
 
 func createProxies(config *ProxyConfig, router *mux.Router) {
 
-	filters := []moxy.FilterFunc{AddSecurityHeaders}
+	filters := []moxy.FilterFunc{SetRequestID}
 	proxy := moxy.NewReverseProxy(config.Targets, filters)
 	jwtMiddleware := jwtmiddleware.New(jwtmiddleware.Options{
 		ValidationKeyGetter: func(token *jwt.Token) (interface{}, error) {

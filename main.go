@@ -35,10 +35,9 @@ func readConfig(path string) (*Config, error) {
 	return config, nil
 }
 
-//AddSecurityHeaders comment
-func AddSecurityHeaders(request *http.Request, response *http.Response) {
-	response.Header.Del("X-Powered-By")
-	response.Header.Set("X-Super-Secure", "Yes!!")
+// SetRequestID sets request ID as response header
+func SetRequestID(request *http.Request, response *http.Response, id string) {
+	response.Header.Set("X-RevProx-Id", id)
 }
 
 var port string
