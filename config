@@ -1,8 +1,8 @@
 proxy "google.example.com" {
   secret = "secret"
   authpath = [ "/admin", "/" ]
-  publicpath = [ "/article/{category}" ]
-  target = ["google.com", "google.de"]
+  publicpath = [ "/article/{category}", "/{test:.*}" ]
+  target = ["https://www.google.com", "http://www.google.de"]
   overwritehost = true
   hostname = "google.com"
 }

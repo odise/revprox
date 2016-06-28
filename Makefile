@@ -3,3 +3,6 @@ build build_osx:
 
 test:
 	go test
+
+run:
+	./dist/revprox-osx

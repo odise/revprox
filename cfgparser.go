@@ -19,8 +19,6 @@ type ProxyConfig struct {
 	AuthPath   []string `hcl:"authpath"`
 	PublicPath []string `hcl:"publicpath"`
 	Targets    []string `hcl:"target"`
-	Overwrite  bool     `hcl:"overwritehost"`
-	Hostname   string   `hcl:"hostname"`
 }
 
 // ParseConfig parse the given HCL string into a Config struct.

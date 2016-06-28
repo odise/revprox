@@ -15,8 +15,6 @@ func TestConfigParsing(t *testing.T) {
 				AuthPath:   []string{"/"},
 				PublicPath: []string{"/"},
 				Targets:    []string{"forward1.host.example.com", "forward2.host.example.com"},
-				Overwrite:  true,
-				Hostname:   "service.example.com",
 			},
 		},
 	}

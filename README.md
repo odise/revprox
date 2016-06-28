@@ -1,10 +1,10 @@
 # revprox
 
-This is a simple example on how to implement reverse proxy functionality coupled with JWT token checking in Go. 
+This is a simple example on how to implement reverse proxy functionality coupled with JWT token checking in Go.
 
-## Disclaimer 
+## Disclaimer
 
-This code is far away from being complete. It wasn't written as part of API Gateway evaluation and might be extended (or not). The tool should run behind a load-balancer which is responsible for TLS termination and scaling. Feel welcome to provide feedback. 
+This code is far away from being complete. It wasn't written as part of API Gateway evaluation and might be extended (or not). The tool should run behind a load-balancer which is responsible for TLS termination and scaling. Feel welcome to provide feedback.
 
 ## Configuration
 
@@ -21,11 +21,7 @@ proxy "service.example.com" {
   # publicly accessible URL paths
   publicpath = [ "/article/{category}" ]
   # upstreams
-  target = [ "google.com", "google.de" ]
-  # set the HOST header to this value instead of the configuration name
-  overwritehost = true
-  # HOST header will be set to `google.com` instead of `service.example.com`
-  hostname = "google.com"
+  target = [ "https://google.com", "http://google.de" ]
 }
 ```
 
@@ -46,7 +42,3 @@ Requests missing `Authorization: Bearer ...` header will be responded with HTTP 
 ### Upstream `target`
 
 It is possible to define multiple backends randomly chosen on request time. Check [moxy/utils.go](https://github.com/odise/moxy/blob/master/utils.go) for further information.
-
-### `Host` header
-
-The underlying `moxy` library can rewrite the `Host` header of the request by setting `overwritehost = true` in combination with `hostname`. In the example above every request to `service.example.com` will be proxied to the backend `google.com` (or `google.de` respectively) with HTTP header `Host` rewritten to `google.com`.
